@@ -7,9 +7,11 @@
 using namespace std;
 
 template <typename T>
-class Cola {
+class Cola
+{
 private:
-    struct Nodo {
+    struct Nodo
+    {
         T dato;
         Nodo* siguiente;
 
@@ -20,7 +22,8 @@ private:
     Nodo* nodoFinal;
     int tamano;
 
-    void imprimirRecursivo(Nodo* nodo) const {
+    void imprimirRecursivo(Nodo* nodo) const
+    {
         if (!nodo) return;
         cout << nodo->dato << " -> ";
         imprimirRecursivo(nodo->siguiente);
@@ -29,25 +32,33 @@ private:
 public:
     Cola() : nodoFrente(nullptr), nodoFinal(nullptr), tamano(0) {}
 
-    ~Cola() {
-        while (!estaVacia()) {
+    ~Cola()
+    {
+        while (!estaVacia())
+        {
             desencolar();
         }
     }
 
-    void encolar(T valor) {
+    void encolar(T valor)
+    {
         Nodo* nuevoNodo = new Nodo(valor);
-        if (estaVacia()) {
+        if (estaVacia())
+        {
             nodoFrente = nodoFinal = nuevoNodo;
-        } else {
+        }
+        else
+        {
             nodoFinal->siguiente = nuevoNodo;
             nodoFinal = nuevoNodo;
         }
         tamano++;
     }
 
-    void desencolar() {
-        if (estaVacia()) {
+    void desencolar()
+    {
+        if (estaVacia())
+        {
             throw underflow_error("La cola está vacía");
         }
         Nodo* temp = nodoFrente;
@@ -58,29 +69,36 @@ public:
         if (!nodoFrente) nodoFinal = nullptr;
     }
 
-    T frente() const {
-        if (estaVacia()) {
+    T frente() const
+    {
+        if (estaVacia())
+        {
             throw underflow_error("La cola está vacía");
         }
         return nodoFrente->dato;
     }
 
-    bool estaVacia() const {
+    bool estaVacia() const
+    {
         return nodoFrente == nullptr;
     }
 
-    int obtenerTamano() const {
+    int obtenerTamano() const
+    {
         return tamano;
     }
 
-    void imprimirRecursivo() const {
+    void imprimirRecursivo() const
+    {
         imprimirRecursivo(nodoFrente);
         cout << "NULL\n";
     }
 
-    friend ostream& operator<<(ostream& os, const Cola<T>& cola) {
+    friend ostream& operator<<(ostream& os, const Cola<T>& cola)
+    {
         Nodo* actual = cola.nodoFrente;
-        while (actual) {
+        while (actual)
+        {
             os << "[" << actual->dato << "] -> ";
             actual = actual->siguiente;
         }
